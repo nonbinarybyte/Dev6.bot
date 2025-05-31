@@ -130,16 +130,18 @@ async def on_ready():
 @bot.event
 async def setup_hook():
     await run_webhook_server()
-    # Debug: check loaded commands
-    for cmd in bot.tree.get_commands():
-        print(f"🔍 Found command: {cmd.name}")
-        
-    try:
-        guild = discord.Object(id=1361525537545125928)
-        synced = await bot.tree.sync(guild=guild)
-        print(f"✅ Synced {len(synced)} command(s) to your server!")
-    except Exception as e:
-        print(f"❌ Slash command sync failed: {e}")
+    guild_id = 1361525537545125928
+    guild = discord.Object(id=guild_id)
 
+    print("🔁 Clearing and syncing commands...")
+    try:
+    # Optional: clear existing guild commands
+    await bot.tree.clear_commands(guild=guild)
+
+    # Sync again
+    synced = await bot.tree.sync(guild=guild)
+    print(f"✅ Synced {len(synced)} command(s) to guild {guild_id}!")
+    except Exception as e:
+    print(f"❌ Slash command sync failed: {e}")
 
 bot.run(BOT_TOKEN)
