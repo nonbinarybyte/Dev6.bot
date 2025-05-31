@@ -135,13 +135,10 @@ async def setup_hook():
 
     print("🔁 Clearing and syncing commands...")
     try:
-    # Optional: clear existing guild commands
-        await bot.tree.clear_commands(guild=guild)
-
-    # Sync again
+        bot.tree.clear_commands(guild=guild)  # ✅ No 'await' here
         synced = await bot.tree.sync(guild=guild)
         print(f"✅ Synced {len(synced)} command(s) to guild {guild_id}!")
     except Exception as e:
         print(f"❌ Slash command sync failed: {e}")
-
+        
 bot.run(BOT_TOKEN)
