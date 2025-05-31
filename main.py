@@ -131,10 +131,10 @@ async def on_ready():
 async def setup_hook():
     await run_webhook_server()
     try:
-    guild = discord.Object(id=1361525537545125928)
-    synced = await bot.tree.sync(guild=guild)
-    print(f"✅ Synced {len(synced)} command(s) to your server!")
+        guild = discord.Object(id=1361525537545125928)
+        synced = await bot.tree.sync(guild=guild)
+        print(f"✅ Synced {len(synced)} command(s) to your server!")
 except Exception as e:
-    print(f"❌ Slash command sync failed: {e}")
+        print(f"❌ Slash command sync failed: {e}")
 
 bot.run(BOT_TOKEN)
