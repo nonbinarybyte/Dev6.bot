@@ -120,6 +120,12 @@ async def run_webhook_server():
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
+    try:
+        guild = discord.Object(id=1361525537545125928)  # Your server
+        synced = await bot.tree.sync(guild=guild)
+        print(f"✅ Synced {len(synced)} command(s) to the test server!")
+    except Exception as e:
+        print(f"❌ Failed to sync commands: {e}")
 
 @bot.event
 async def setup_hook():
