@@ -4,7 +4,7 @@ from aiohttp import web
 import json
 
 # --- CONFIG ---
-BOT_TOKEN = BOT_TOKEN  # Replace with your bot token
+BOT_TOKEN = os.getenv('BOT_TOKEN') # Replace with your bot token
 CONFIG_FILE = 'server_config.json'
 
 # --- GLOBAL STATE ---
