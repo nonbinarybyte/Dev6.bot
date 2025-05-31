@@ -40,7 +40,7 @@ async def setup_hook():
         guild = discord.Object(id=GUILD_ID)
         print("🔁 Syncing commands to guild...")
         bot.tree.clear_commands(guild=guild)
-        synced = await bot.tree.sync(guild=guild)
+        synced = await bot.tree.sync()
         print(f"✅ Synced {len(synced)} command(s) to guild {GUILD_ID}")
     except Exception as e:
         print(f"❌ Sync failed: {e}")
