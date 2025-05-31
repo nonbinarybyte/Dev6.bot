@@ -38,11 +38,11 @@ async def set_channel(interaction: discord.Interaction):
     await interaction.response.send_message("✅ This channel is now set for GitHub commit announcements.", ephemeral=True)
     @set_channel.error
     async def set_channel_error(interaction: discord.Interaction, error):
-    if isinstance(error, app_commands.errors.MissingPermissions):
-        await interaction.response.send_message(
-            "❌ You need Administrator permissions to use this command.",
-            ephemeral=True
-        )
+        if isinstance(error, app_commands.errors.MissingPermissions):
+            await interaction.response.send_message(
+                "❌ You need Administrator permissions to use this command.",
+                ephemeral=True
+            )
 
 @bot.tree.command(name="set_template", description="Set message template for a repo")
 async def set_template(interaction: discord.Interaction, repo: str, template: str):
