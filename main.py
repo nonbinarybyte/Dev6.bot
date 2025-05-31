@@ -130,8 +130,8 @@ async def on_ready():
 @bot.event
 async def setup_hook():
     await run_webhook_server()
-        guild_id = 1361525537545125928
-        guild = discord.Object(id=guild_id)
+    guild_id = 1361525537545125928
+    guild = discord.Object(id=guild_id)
 
     print("🔁 Clearing and syncing commands...")
     try:
