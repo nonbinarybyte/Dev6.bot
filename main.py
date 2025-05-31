@@ -131,15 +131,15 @@ async def on_ready():
 async def setup_hook():
     await run_webhook_server()
     # Debug: check loaded commands
-for cmd in bot.tree.get_commands():
-    print(f"🔍 Found command: {cmd.name}")
-    
-try:
-    guild = discord.Object(id=1361525537545125928)
-    synced = await bot.tree.sync(guild=guild)
-    print(f"✅ Synced {len(synced)} command(s) to your server!")
-except Exception as e:
-    print(f"❌ Slash command sync failed: {e}")
+    for cmd in bot.tree.get_commands():
+        print(f"🔍 Found command: {cmd.name}")
+        
+    try:
+        guild = discord.Object(id=1361525537545125928)
+        synced = await bot.tree.sync(guild=guild)
+        print(f"✅ Synced {len(synced)} command(s) to your server!")
+    except Exception as e:
+        print(f"❌ Slash command sync failed: {e}")
 
 
 bot.run(BOT_TOKEN)
