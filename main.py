@@ -110,18 +110,19 @@ app = web.Application()
 app.add_routes(routes)
 
 # --- STARTUP ---
-async def start():
-    load_config()
+async def run_webhook_server():
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, '0.0.0.0', 8080)
     await site.start()
-    print("Webhook server running at http://localhost:8080/github")
+    print("Webhook server running at http://0.0.0.0:8080/github")
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
-    await bot.tree.sync()
+    print(f"Logged in as {bot.user} (ID: {bot.user.id})")
 
-bot.loop.create_task(start())
+@bot.event
+async def setup_hook():
+    await run_webhook_server()
+
 bot.run(BOT_TOKEN)
