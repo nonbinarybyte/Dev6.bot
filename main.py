@@ -29,7 +29,6 @@ def load_config():
         server_config = {}
 
 # --- SLASH COMMANDS ---
-@app_commands.checks.has_permissions(administrator=True)
 @bot.tree.command(name="set_channel", description="Set the announcement channel")
 async def set_channel(interaction: discord.Interaction):
     guild_id = str(interaction.guild_id)
