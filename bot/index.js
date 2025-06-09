@@ -45,6 +45,35 @@ client.once(Events.ClientReady, c => {
     console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
+// Modal Submit Handler
+client.on(Events.InteractionCreate, async interaction => {
+  if (!interaction.isModalSubmit()) return;
+  
+  if (interaction.customId === 'announcementModal') {
+    const title = interaction.fields.getTextInputValue('titleInput');
+    const description = interaction.fields.getTextInputValue('descriptionInput');
+    const imageUrl = interaction.fields.getTextInputValue('imageInput') || null;
+
+    const embed = new EmbedBuilder()
+      .setTitle(title)
+      .setDescription(description)
+      .setColor('#0099ff')
+      .setTimestamp();
+
+    if (imageUrl) embed.setImage(imageUrl);
+
+    // Get ping role from database (pseudo-code)
+    // const pingRole = await db.getPingRole(interaction.guildId);
+    const pingRole = 'everyone'; // Replace with actual lookup
+
+    await interaction.reply({
+      content: pingRole === 'everyone' ? '@everyone' : `<@&${pingRole}>`,
+      embeds: [embed],
+      allowedMentions: { parse: ['everyone', 'roles'] }
+    });
+  }
+});
+
 // Event: Interaction handling
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
